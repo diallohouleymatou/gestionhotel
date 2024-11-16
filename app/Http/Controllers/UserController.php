@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -44,8 +45,15 @@ class UserController extends Controller
             ]);
             if(Auth::attempt(['email'=>$requestValid['email'],'password'=>$requestValid['password']])){
                 return redirect('/acceuil');
+              
             }
         }
         return view('login');
     }
+
+    public function acceuil(){
+        return view('acceuil');
+    }
+
+    
 }

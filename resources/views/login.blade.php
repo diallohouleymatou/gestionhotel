@@ -61,7 +61,8 @@
     <div class="overlay"></div>
     <div class="form-container">
         <h2 class="text-center">Connexion</h2>
-        <form>
+        <form method ="post" action = "{{route('login')}}">
+            @csrf
             <!-- Champ Email -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
