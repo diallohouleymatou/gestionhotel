@@ -111,7 +111,7 @@
           <div class="card bg-light">
             <div class="card-body">
               <h5 class="card-title">Chambres Disponibles</h5>
-              <p class="card-text">12</p>
+              <p class="card-text">{{$chambres->count()}}</p>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
           <div class="card bg-light">
             <div class="card-body">
               <h5 class="card-title">Utilisateurs</h5>
-              <p class="card-text">30</p>
+              <p class="card-text">{{$users->count()}}</p>
             </div>
           </div>
         </div>
@@ -154,8 +154,8 @@
             <td>{{$item->prix}}</td>
             <td>{{$item->type}}</td>
             <td>
-              <button class="btn btn-edit btn-sm">Modifier</button>
-              <button class="btn btn-delete btn-sm">Supprimer</button>
+              <a href="{{route('modifier',$item)}}" class="btn btn-edit btn-sm">Modifier</a> 
+              <a href="{{route('supprimer',$item)}}" class="btn btn-delete btn-sm">Supprimer</a>
             </td>
           </tr>
          @endforeach

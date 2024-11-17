@@ -57,8 +57,16 @@ class UserController extends Controller
     }
 
     public function dashboard(){
+        $users = User::all();
         $chambres = Chambre::all();
-        return view('dashboard',compact("chambres"));
+        return view('dashboard',compact("chambres","users"));
+    }
+
+    public function logout(Request $request){
+        if ($request->isMethod('POST')){
+            Auth::logout();
+            return redirect('/login');
+        }
     }
 
     
