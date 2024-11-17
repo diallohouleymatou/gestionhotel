@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Chambre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -53,6 +54,11 @@ class UserController extends Controller
 
     public function acceuil(){
         return view('acceuil');
+    }
+
+    public function dashboard(){
+        $chambres = Chambre::all();
+        return view('dashboard',compact("chambres"));
     }
 
     
