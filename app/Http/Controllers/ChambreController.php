@@ -9,15 +9,16 @@ class ChambreController extends Controller
 {
     //
     public function ajouter(Request $request){
-        
+
         if($request->isMethod('post')){
             $requestValid = $request->validate([
-            "code"=>"min:1|required",
-            "prix"=>"min:0|required",
+            "code"=>"required",
+            "prix"=>"required",
             "type"=>"required",
-            "description"=>"min:5|required",
+            "description"=>"required",
             ]);
-            $cu = Chambre::where('code',$requestValid['code']);
+            echo"dssssdsds";
+            $cu = Chambre::where('code',$requestValid['code'])->first();
             if(!$cu){
             $chambre = new Chambre();
             $chambre->code = $requestValid['code'];
@@ -29,8 +30,6 @@ class ChambreController extends Controller
             }else{
                 return redirect('/ajouter');
             }
-
-
         }
         return view('ajouter');
     }
@@ -59,12 +58,12 @@ class ChambreController extends Controller
                     $chambre->save();
                     return redirect ('/dashboard');
                     }
-                    
+
 
                 }
                 return view('modifier',compact('chambre'));
-     
+
     }
 
-    
+
 }

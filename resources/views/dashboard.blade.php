@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Admin - Hôtel</title>
-  
+
   <!-- Lien vers Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -92,7 +92,10 @@
     <a href="#statistiques">Statistiques</a>
     <a href="#utilisateurs">Utilisateurs</a>
     <a href="#profil">Mon Profil</a>
-    <a href="#logout" class="text-danger">Déconnexion</a>
+    <form action="{{route('logout')}}" method="post">
+        @csrf
+        <button type="submit" class="text-danger">Déconnexion</button>
+    </form>
   </div>
 
   <!-- Content -->
@@ -153,8 +156,9 @@
             <td>{{$item->code}}</td>
             <td>{{$item->prix}}</td>
             <td>{{$item->type}}</td>
+            <td>{{$disponibilite}}</td>
             <td>
-              <a href="{{route('modifier',$item)}}" class="btn btn-edit btn-sm">Modifier</a> 
+              <a href="{{route('modifier',$item)}}" class="btn btn-edit btn-sm">Modifier</a>
               <a href="{{route('supprimer',$item)}}" class="btn btn-delete btn-sm">Supprimer</a>
             </td>
           </tr>

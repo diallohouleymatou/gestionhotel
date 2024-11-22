@@ -28,12 +28,12 @@ class UserController extends Controller
             $user->nom = $requestValid['nom'];
             $user->email = $requestValid['email'];
             $user->password = Hash::make($requestValid['password']);
-            $user->role = "user";
+            $user->role = "admin";
             $user->save();
             return redirect ('/login');
 
         }
-     
+
         return view('register');
     }
 
@@ -46,20 +46,33 @@ class UserController extends Controller
             ]);
             if(Auth::attempt(['email'=>$requestValid['email'],'password'=>$requestValid['password']])){
                 return redirect('/acceuil');
-              
+
             }
         }
         return view('login');
     }
 
     public function acceuil(){
+        if(Auth::user()->isAdmin()){
+            return redirect('/dashboard');
+        }
         return view('acceuil');
     }
 
     public function dashboard(){
+        if(!Auth::user()->isAdmin()){
+            return redirect('/acceuil');
+        }
         $users = User::all();
         $chambres = Chambre::all();
-        return view('dashboard',compact("chambres","users"));
+        $dispo = $chambres[0]->estDisponible('2024-10-02', '2024-11-02');
+        if($dispo){
+            $disponibilite = "disponible";
+        }else{
+            $disponibilite = "non disponible";
+        }
+
+        return view('dashboard',compact("chambres","users","disponibilite"));
     }
 
     public function logout(Request $request){
@@ -69,5 +82,5 @@ class UserController extends Controller
         }
     }
 
-    
+
 }
